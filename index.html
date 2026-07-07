@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vhen Joseph Fernandez — AI Product Engineer Lead</title>
+<meta name="description" content="Vhen Joseph Fernandez — AI &amp; software engineering leader. 14+ years shipping production systems; now building AI-native, agentic architecture." />
+<meta name="author" content="Vhen Joseph Fernandez" />
+<meta property="og:title" content="Vhen Joseph Fernandez — AI Product Engineer Lead" />
+<meta property="og:description" content="AI-native engineering &amp; agentic architecture. 14+ years shipping production systems." />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#080a10;
+    --bg2:#0d1018;
+    --panel:rgba(255,255,255,.03);
+    --line:rgba(255,255,255,.08);
+    --txt:#e7ecf3;
+    --dim:#8b95a7;
+    --accent:#5eead4;
+    --accent2:#818cf8;
+    --accent3:#f0abfc;
+    --glow:rgba(94,234,212,.35);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Space Grotesk',system-ui,sans-serif;
+    background:var(--bg);
+    color:var(--txt);
+    line-height:1.6;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--accent);color:#04121b}
+  a{color:inherit;text-decoration:none}
+  .mono{font-family:'JetBrains Mono',monospace}
+
+  /* animated background canvas */
+  #net{position:fixed;inset:0;z-index:0;opacity:.55}
+  .grad{
+    position:fixed;inset:0;z-index:0;pointer-events:none;
+    background:
+      radial-gradient(700px 500px at 15% 10%, rgba(129,140,248,.18), transparent 60%),
+      radial-gradient(600px 500px at 85% 20%, rgba(94,234,212,.14), transparent 60%),
+      radial-gradient(700px 600px at 60% 100%, rgba(240,171,252,.10), transparent 60%);
+  }
+  .wrap{position:relative;z-index:2;max-width:960px;margin:0 auto;padding:0 24px}
+
+  /* nav */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:20;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:18px 28px;
+    backdrop-filter:blur(10px);
+    background:linear-gradient(180deg,rgba(8,10,16,.75),rgba(8,10,16,0));
+    transition:background .3s;
+  }
+  nav .logo{font-weight:700;letter-spacing:.5px;font-size:15px}
+  nav .logo .dot{color:var(--accent)}
+  nav .links{display:flex;gap:22px;font-size:13px}
+  nav .links a{color:var(--dim);transition:color .2s;position:relative}
+  nav .links a:hover{color:var(--txt)}
+  nav .links a::after{content:'';position:absolute;left:0;bottom:-4px;width:0;height:1px;background:var(--accent);transition:width .25s}
+  nav .links a:hover::after{width:100%}
+  @media(max-width:620px){nav .links{display:none}}
+
+  /* hero */
+  header{min-height:100vh;display:flex;flex-direction:column;justify-content:center;position:relative}
+  .tag{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--accent);
+    border:1px solid var(--line);border-radius:100px;padding:6px 14px;margin-bottom:26px;
+    background:var(--panel);width:max-content;
+  }
+  .tag .pulse{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 0 var(--glow);animation:pulse 2s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 var(--glow)}70%{box-shadow:0 0 0 9px transparent}100%{box-shadow:0 0 0 0 transparent}}
+  h1{
+    font-size:clamp(40px,8vw,82px);font-weight:700;line-height:1.02;letter-spacing:-1.5px;margin-bottom:18px;
+  }
+  h1 .g{
+    background:linear-gradient(110deg,var(--accent),var(--accent2) 55%,var(--accent3));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    background-size:200% auto;animation:shine 6s linear infinite;
+  }
+  @keyframes shine{to{background-position:200% center}}
+  .role{font-size:clamp(17px,3.5vw,23px);color:var(--txt);font-weight:500;margin-bottom:8px;min-height:1.4em}
+  .role .cursor{display:inline-block;width:2px;height:1.05em;background:var(--accent);vertical-align:-3px;margin-left:2px;animation:blink 1s steps(2) infinite}
+  @keyframes blink{50%{opacity:0}}
+  .sub{color:var(--dim);font-size:16px;max-width:640px;margin-top:16px}
+  .cta{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap}
+  .btn{
+    font-family:'JetBrains Mono',monospace;font-size:13.5px;padding:12px 20px;border-radius:10px;
+    border:1px solid var(--line);color:var(--txt);transition:.25s;display:inline-flex;align-items:center;gap:8px;
+  }
+  .btn.primary{background:linear-gradient(110deg,var(--accent),var(--accent2));color:#04121b;border-color:transparent;font-weight:700}
+  .btn:hover{transform:translateY(-2px)}
+  .btn.primary:hover{box-shadow:0 12px 30px -10px var(--glow)}
+  .btn.ghost:hover{border-color:var(--accent);color:var(--accent)}
+  .scrollhint{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);color:var(--dim);font-size:11px;letter-spacing:2px;font-family:'JetBrains Mono',monospace;animation:float 2.5s ease-in-out infinite}
+  @keyframes float{50%{transform:translate(-50%,7px)}}
+
+  /* sections */
+  section{padding:96px 0;position:relative}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--accent);letter-spacing:1px;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+  .eyebrow::before{content:'';width:26px;height:1px;background:var(--accent)}
+  h2{font-size:clamp(26px,5vw,40px);font-weight:700;letter-spacing:-.5px;margin-bottom:34px}
+
+  /* skills */
+  .skillgroup{margin-bottom:26px}
+  .skillgroup h3{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--dim);margin-bottom:14px;font-weight:500;text-transform:uppercase;letter-spacing:1px}
+  .chips{display:flex;flex-wrap:wrap;gap:10px}
+  .chip{
+    font-size:13.5px;padding:8px 14px;border-radius:8px;border:1px solid var(--line);background:var(--panel);
+    color:var(--txt);transition:.2s;cursor:default;
+  }
+  .chip:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+  .skillgroup.past .chip{color:var(--dim)}
+
+  /* timeline */
+  .timeline{position:relative;padding-left:26px}
+  .timeline::before{content:'';position:absolute;left:5px;top:6px;bottom:6px;width:1px;background:linear-gradient(var(--accent),var(--accent2),transparent)}
+  .job{position:relative;margin-bottom:38px}
+  .job::before{content:'';position:absolute;left:-25px;top:6px;width:11px;height:11px;border-radius:50%;background:var(--bg);border:2px solid var(--accent);box-shadow:0 0 12px var(--glow)}
+  .job .when{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent2);margin-bottom:5px}
+  .job h3{font-size:19px;font-weight:600;margin-bottom:3px}
+  .job .co{color:var(--dim);font-size:14px;margin-bottom:12px}
+  .job ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+  .job li{position:relative;padding-left:20px;color:#c3cbd8;font-size:15px}
+  .job li::before{content:'▹';position:absolute;left:0;color:var(--accent)}
+  .job.compact{margin-bottom:24px}
+  .job.compact .co{margin-bottom:6px}
+
+  /* featured project */
+  .feature{
+    border:1px solid var(--line);border-radius:18px;padding:34px;background:
+      linear-gradient(150deg,rgba(129,140,248,.08),rgba(94,234,212,.04));
+    position:relative;overflow:hidden;
+  }
+  .feature::before{content:'';position:absolute;top:-40%;right:-10%;width:340px;height:340px;background:radial-gradient(circle,var(--glow),transparent 70%);opacity:.4}
+  .feature .pill{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--accent);border:1px solid var(--line);border-radius:100px;padding:5px 12px;display:inline-block;margin-bottom:16px}
+  .feature h3{font-size:23px;margin-bottom:12px}
+  .feature p{color:#c3cbd8;font-size:15.5px;position:relative}
+  .stack{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+  .stack span{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--dim);border:1px solid var(--line);border-radius:6px;padding:5px 10px}
+
+  /* education */
+  .edu{border-left:2px solid var(--line);padding-left:22px}
+  .edu h3{font-size:18px;margin-bottom:4px}
+  .edu .co{color:var(--dim);font-size:14px;margin-bottom:10px}
+  .edu p{color:#c3cbd8;font-size:14.5px}
+
+  /* footer */
+  footer{padding:70px 0 50px;text-align:center;border-top:1px solid var(--line);margin-top:40px}
+  footer h2{margin-bottom:14px}
+  footer p{color:var(--dim);margin-bottom:26px}
+  .social{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+  .foot-note{margin-top:44px;color:#4a5364;font-size:12px;font-family:'JetBrains Mono',monospace}
+
+  /* reveal animation */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+<canvas id="net"></canvas>
+<div class="grad"></div>
+
+<nav>
+  <div class="logo">VJF<span class="dot">.</span></div>
+  <div class="links">
+    <a href="#about">about</a>
+    <a href="#skills">skills</a>
+    <a href="#work">work</a>
+    <a href="#projects">projects</a>
+    <a href="#contact">contact</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <header>
+    <div class="tag reveal"><span class="pulse"></span> Available for senior AI architecture roles</div>
+    <h1 class="reveal">Vhen Joseph<br><span class="g">Fernandez</span></h1>
+    <div class="role mono reveal"><span id="typed"></span><span class="cursor"></span></div>
+    <p class="sub reveal">14+ years shipping production systems — now building AI-native, agentic architecture. I work the line that matters: senior-stakeholder design on one side, hands-on production code on the other.</p>
+    <div class="cta reveal">
+      <a class="btn primary" href="#contact">Get in touch →</a>
+      <a class="btn ghost" href="https://github.com/techykamatis" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn ghost" href="https://linkedin.com/in/vhenjoseph" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <div class="scrollhint">SCROLL ↓</div>
+  </header>
+
+  <section id="about">
+    <div class="eyebrow reveal">01 — about</div>
+    <h2 class="reveal">Building what works, and the teams that keep it working.</h2>
+    <p class="sub reveal" style="max-width:760px;font-size:17px;color:#c3cbd8">
+      AI and software engineering leader based in Kuala Lumpur. I currently lead AI product engineering at
+      <strong style="color:var(--txt)">YTL AI Labs</strong> — integrating a homegrown LLM (ILMU) into a public consumer product,
+      running Kubernetes infra on AWS, and setting the engineering practices that let a small team ship fast
+      without chaos. My focus now is agentic systems, model integration, and AI-augmented delivery — the applied,
+      production side of GenAI, not the research slides.
+    </p>
+  </section>
+
+  <section id="skills">
+    <div class="eyebrow reveal">02 — stack</div>
+    <h2 class="reveal">What I work with</h2>
+    <div class="skillgroup reveal">
+      <h3>// current focus</h3>
+      <div class="chips" id="chips-recent"></div>
+    </div>
+    <div class="skillgroup past reveal">
+      <h3>// foundations</h3>
+      <div class="chips" id="chips-past"></div>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="eyebrow reveal">03 — experience</div>
+    <h2 class="reveal">Where I've shipped</h2>
+    <div class="timeline">
+
+      <div class="job reveal">
+        <div class="when">JUL 2025 — PRESENT</div>
+        <h3>AI Product Engineer Lead</h3>
+        <div class="co">YTL AI Labs · Bukit Bintang, KL</div>
+        <ul>
+          <li>Led integration of YTL's in-house LLM (ILMU) into ILMUchat — a public consumer product serving real users at scale</li>
+          <li>Owned production model-integration decisions: prompt design, context management, cost/latency trade-offs</li>
+          <li>Architected &amp; maintained Kubernetes infra on AWS EKS across dev, staging &amp; production with full CI/CD</li>
+          <li>Defined engineering SOPs, Git branching strategy &amp; deployment standards adopted across the team</li>
+        </ul>
+      </div>
+
+      <div class="job reveal">
+        <div class="when">SEP 2023 — JUL 2025</div>
+        <h3>Head of Delivery</h3>
+        <div class="co">FrogAsia Sdn Bhd · Sentul, KL</div>
+        <ul>
+          <li>Led GenAI modernization of a legacy EduTech platform — RAG over internal docs + self-hosted AI workflows (FlowiseAI)</li>
+          <li>Single point of accountability for delivery across Product, Data, Customer Success, Content, Business Ops &amp; Tech</li>
+          <li>Managed &amp; mentored in-house and offshore senior engineers across Malaysia &amp; Vietnam</li>
+          <li>Maintained CI/CD pipelines &amp; Docker infra; authored templates used team-wide</li>
+        </ul>
+      </div>
+
+      <div class="job reveal">
+        <div class="when">FEB 2021 — SEP 2023</div>
+        <h3>Development Manager</h3>
+        <div class="co">FrogAsia Sdn Bhd · Sentul, KL</div>
+        <ul>
+          <li>Drove the delivery roadmap and weekly impact updates across the organisation</li>
+          <li>Hands-on lead — contributed Laravel &amp; ReactJS features while leading the team, not managing from a distance</li>
+          <li>Introduced AI orchestration via FlowiseAI and RAG into internal applications</li>
+        </ul>
+      </div>
+
+      <div class="job compact reveal">
+        <div class="when">JAN 2019 — FEB 2021</div>
+        <h3>Class Lead (Line Manager)</h3>
+        <div class="co">FrogAsia Sdn Bhd · Sentul, KL — line-managed senior engineers while hands-on in Laravel, ReactJS &amp; in-house MVC frameworks</div>
+      </div>
+
+      <div class="job compact reveal">
+        <div class="when">AUG 2016 — JAN 2019</div>
+        <h3>Senior Application Engineer</h3>
+        <div class="co">FrogAsia Sdn Bhd · Sentul, KL — built Laravel, ReactJS &amp; MinIO-backed applications from the ground up</div>
+      </div>
+
+      <div class="job compact reveal">
+        <div class="when">2011 — 2016</div>
+        <h3>Technical Specialist / Project Lead</h3>
+        <div class="co">Alliance Software, Inc. · Cebu, PH — J2EE financial web app for a Japanese client; full-stack on SugarCRM &amp; Codeigniter</div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="eyebrow reveal">04 — selected work</div>
+    <h2 class="reveal">Things I've built</h2>
+    <div class="feature reveal">
+      <span class="pill">● PERSONAL · 2026 · RUNNING DAILY</span>
+      <h3>Candice — Production Multi-Agent AI System</h3>
+      <p>
+        Designed and built a production multi-agent assistant with a custom orchestration layer — the full agentic
+        stack this industry is racing toward: tool use, long-term memory, multi-step reasoning, and human-in-the-loop
+        confirmation. Ships with a self-auditing eval/regression harness for local-model selection (latency,
+        JSON-validity, RAM gates), RAG-based context assembly over a personal knowledge vault, proactive triggers,
+        and AI-augmented engineering workflows. Self-hosted, observable, and running every day.
+      </p>
+      <div class="stack">
+        <span>Multi-Agent Orchestration</span><span>RAG</span><span>Long-term Memory</span>
+        <span>Model Eval Harness</span><span>Local + Cloud LLMs</span><span>Self-hosted</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="eyebrow reveal">05 — education</div>
+    <h2 class="reveal">Foundations</h2>
+    <div class="edu reveal">
+      <h3>B.S. Computer Engineering — Major in Software Engineering</h3>
+      <div class="co">University of San Carlos, Cebu, PH · 2006 – 2011</div>
+      <p><strong style="color:var(--txt)">Thesis (Development Head):</strong> Cryptographic library for general-purpose GPU computing on the Nvidia CUDA architecture — benchmarked GPU vs CPU performance for encryption workloads. Written in C#.</p>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <div class="eyebrow reveal" style="justify-content:center">06 — contact</div>
+    <h2 class="reveal">Let's build something.</h2>
+    <p class="reveal">Open to senior AI product engineering &amp; solution architecture roles.</p>
+    <div class="social reveal">
+      <a class="btn primary" href="mailto:vhenjoseph@gmail.com">Email me →</a>
+      <a class="btn ghost" href="https://linkedin.com/in/vhenjoseph" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn ghost" href="https://github.com/techykamatis" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <div class="foot-note">Kuala Lumpur, Malaysia · designed &amp; built by Vhen Joseph Fernandez</div>
+  </footer>
+</div>
+
+<script>
+  // ---- typed role ----
+  const roles=['AI Product Engineer Lead','Agentic Systems Architect','AI-Native Engineering Leader','Builder of things that ship'];
+  const el=document.getElementById('typed');
+  let ri=0,ci=0,del=false;
+  function type(){
+    const w=roles[ri];
+    el.textContent=del?w.slice(0,ci--):w.slice(0,ci++);
+    if(!del&&ci===w.length+1){del=true;setTimeout(type,1600);return;}
+    if(del&&ci<0){del=false;ri=(ri+1)%roles.length;ci=0;}
+    setTimeout(type,del?38:78);
+  }
+  type();
+
+  // ---- skill chips ----
+  const recent=['Agentic Systems','Multi-Agent Orchestration','LLM Integration','Prompt Engineering','Context Management','Model Selection &amp; Eval','Cost / Latency Optimization','RAG','AI-Augmented SDLC','Kubernetes','AWS (EKS · EC2 · S3 · IAM)','Docker','API Design','Observability','Technical Leadership'];
+  const past=['PHP','Laravel','ReactJS','MySQL','J2EE','KnockoutJS','SugarCRM','Codeigniter','C#','Nvidia CUDA'];
+  const mk=(arr,id)=>document.getElementById(id).innerHTML=arr.map(s=>`<span class="chip">${s}</span>`).join('');
+  mk(recent,'chips-recent');mk(past,'chips-past');
+
+  // ---- scroll reveal ----
+  const io=new IntersectionObserver((es)=>{
+    es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:.14});
+  document.querySelectorAll('.reveal').forEach((e,i)=>{e.style.transitionDelay=(Math.min(i,6)*40)+'ms';io.observe(e);});
+
+  // ---- particle network background ----
+  const cv=document.getElementById('net'),cx=cv.getContext('2d');
+  let W,H,pts;
+  function resize(){W=cv.width=innerWidth;H=cv.height=innerHeight;const n=Math.min(70,Math.floor(W*H/22000));pts=Array.from({length:n},()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35}));}
+  resize();addEventListener('resize',resize);
+  let mx=-999,my=-999;
+  addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+  addEventListener('mouseout',()=>{mx=-999;my=-999;});
+  function draw(){
+    cx.clearRect(0,0,W,H);
+    for(const p of pts){
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;
+      const dm=Math.hypot(p.x-mx,p.y-my);
+      if(dm<130){p.x+=(p.x-mx)/dm*.6;p.y+=(p.y-my)/dm*.6;}
+    }
+    for(let i=0;i<pts.length;i++){
+      for(let j=i+1;j<pts.length;j++){
+        const a=pts[i],b=pts[j],d=Math.hypot(a.x-b.x,a.y-b.y);
+        if(d<128){cx.strokeStyle=`rgba(94,234,212,${.14*(1-d/128)})`;cx.lineWidth=1;cx.beginPath();cx.moveTo(a.x,a.y);cx.lineTo(b.x,b.y);cx.stroke();}
+      }
+    }
+    for(const p of pts){cx.fillStyle='rgba(129,140,248,.7)';cx.beginPath();cx.arc(p.x,p.y,1.4,0,7);cx.fill();}
+    requestAnimationFrame(draw);
+  }
+  draw();
+
+  // ---- nav bg on scroll ----
+  addEventListener('scroll',()=>{document.querySelector('nav').style.background=scrollY>40?'rgba(8,10,16,.85)':'linear-gradient(180deg,rgba(8,10,16,.75),rgba(8,10,16,0))';});
+</script>
+</body>
+</html>
