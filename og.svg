@@ -12,7 +12,4 @@
   <!-- footer -->
   <rect x="80" y="524" width="44" height="3" fill="#1A1A1A"/>
   <text x="80" y="566" font-family="Helvetica, Arial, sans-serif" font-size="24" fill="#8B8378">vhenjoseph.com</text>
-  <!-- monogram -->
-  <rect x="1004" y="436" width="116" height="116" rx="26" fill="#1A1A1A"/>
-  <text x="1062" y="524" font-family="Helvetica, Arial, sans-serif" font-weight="600" font-size="66" fill="#F5F3EF" text-anchor="middle">v</text>
 </svg>
