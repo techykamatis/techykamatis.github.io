@@ -547,5 +547,70 @@
     })();
   });
 </script>
+
+<!-- Analytics: privacy-first, cookieless. Fill the two IDs below to activate; empty = nothing external loads. -->
+<script>
+(function () {
+  var CFG = {
+    cloudflareToken: '',   // Cloudflare Web Analytics beacon token (traffic, geo, referrers)
+    clarityId: '',         // Microsoft Clarity project id (scroll heatmaps + session replay)
+    beaconEndpoint: ''     // optional: POST engagement summary to your own endpoint
+  };
+
+  if (CFG.cloudflareToken) {
+    var cf = document.createElement('script');
+    cf.defer = true;
+    cf.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+    cf.setAttribute('data-cf-beacon', JSON.stringify({ token: CFG.cloudflareToken }));
+    document.head.appendChild(cf);
+  }
+
+  if (CFG.clarityId) {
+    (function (c, l, a, r, i, t, y) { c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) }; t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i; y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y) })(window, document, "clarity", "script", CFG.clarityId);
+  }
+
+  // ---- custom engagement + read-completion (no cookies, no PII, no fingerprinting) ----
+  var engagedMs = 0, last = Date.now(), active = true, idleTimer = null, IDLE = 30000;
+  function tick() { if (active) engagedMs += Date.now() - last; last = Date.now(); }
+  function goIdle() { tick(); active = false; }
+  function goActive() { if (!active) { active = true; last = Date.now(); } resetIdle(); }
+  function resetIdle() { clearTimeout(idleTimer); idleTimer = setTimeout(goIdle, IDLE); }
+  ['mousemove', 'keydown', 'scroll', 'touchstart', 'click'].forEach(function (ev) { window.addEventListener(ev, goActive, { passive: true }); });
+  window.addEventListener('blur', goIdle);
+  window.addEventListener('focus', goActive);
+  resetIdle();
+
+  var marks = { 25: false, 50: false, 75: false, 100: false };
+  function report(name, val) {
+    if (window.clarity) { try { window.clarity('event', name); if (val != null) window.clarity('set', name, String(val)); } catch (e) {} }
+    (window.__engagement = window.__engagement || []).push([name, val, Math.round(engagedMs / 1000) + 's']);
+  }
+  function onScrollDepth() {
+    tick();
+    var pct = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight * 100;
+    [25, 50, 75, 100].forEach(function (m) { if (!marks[m] && pct >= m) { marks[m] = true; report('scroll_' + m); } });
+  }
+  window.addEventListener('scroll', onScrollDepth, { passive: true });
+
+  // read-completion: saw the closing line AND spent >= 25 engaged seconds
+  var readFired = false, sawClose = false;
+  var closeEl = document.querySelector('.close');
+  if (closeEl && 'IntersectionObserver' in window) {
+    new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { sawClose = true; maybeRead(); } }); }, { threshold: 0.8 }).observe(closeEl);
+  }
+  function maybeRead() { tick(); if (!readFired && sawClose && engagedMs >= 25000) { readFired = true; report('manifesto_read', Math.round(engagedMs / 1000)); } }
+  setInterval(maybeRead, 5000);
+
+  function flush() {
+    tick();
+    var depth = [25, 50, 75, 100].filter(function (k) { return marks[k]; }).reduce(function (a, b) { return Math.max(a, b); }, 0);
+    var summary = { engaged_s: Math.round(engagedMs / 1000), depth: depth, read: readFired };
+    if (window.clarity) { try { window.clarity('set', 'engaged_s', String(summary.engaged_s)); } catch (e) {} }
+    if (CFG.beaconEndpoint && navigator.sendBeacon) { try { navigator.sendBeacon(CFG.beaconEndpoint, JSON.stringify(summary)); } catch (e) {} }
+  }
+  window.addEventListener('pagehide', flush);
+  document.addEventListener('visibilitychange', function () { if (document.hidden) { goIdle(); flush(); } else { goActive(); } });
+})();
+</script>
 </body>
 </html>
